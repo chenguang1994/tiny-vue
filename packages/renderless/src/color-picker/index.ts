@@ -1,11 +1,12 @@
-import {IColorPickerRef} from '@/types';
+import {IColorPickerRef, IColorSelectPanelRef} from '@/types';
 import type Color from './utils/color'
 
 export const onConfirm = (
-  hex: IColorPickerRef<string>, triggerBg: IColorPickerRef<string>,
-  res: IColorPickerRef<string>, emit, isShow: IColorPickerRef<boolean>
+  hex: IColorSelectPanelRef<string>, triggerBg: IColorSelectPanelRef<string>,
+  res: IColorSelectPanelRef<string>, emit, isShow: IColorSelectPanelRef<boolean>
 ) => {
-  return () => {
+  return (color: string) => {
+    res.value=color;
     hex.value = res.value
     triggerBg.value = res.value
     emit('confirm', res.value)
@@ -14,8 +15,8 @@ export const onConfirm = (
 }
 
 export const onCancel = (
-  res: IColorPickerRef<string>, triggerBg: IColorPickerRef<string>, emit, isShow: IColorPickerRef<boolean>,
-  hex: IColorPickerRef<string>, color: Color
+  res: IColorSelectPanelRef<string>, triggerBg: IColorSelectPanelRef<string>, emit, isShow: IColorSelectPanelRef<boolean>,
+  hex: IColorSelectPanelRef<string>, color: Color
 ) => {
   return () => {
     if (isShow.value){
@@ -27,11 +28,11 @@ export const onCancel = (
     isShow.value = false
   }
 }
-export const onColorUpdate = (color: Color, res: IColorPickerRef<string>) => {
+export const onColorUpdate = (color: Color, res: IColorSelectPanelRef<string>, triggerBg?: IColorPickerRef<string>) => {
   res.value = color.getHex()
 }
 
-export const onHSVUpdate = (color: Color, res: IColorPickerRef<string>, hex: IColorPickerRef<string>) => {
+export const onHSVUpdate = (color: Color, res: IColorSelectPanelRef<string>, hex: IColorSelectPanelRef<string>) => {
   return {
     onHueUpdate: (hue: number) => {
       color.set({ h: hue })
@@ -45,7 +46,7 @@ export const onHSVUpdate = (color: Color, res: IColorPickerRef<string>, hex: ICo
   }
 }
 
-export const onAlphaUpdate = (color: Color, res: IColorPickerRef<string>) => {
+export const onAlphaUpdate = (color: Color, res: IColorSelectPanelRef<string>) => {
   return {
     update: (alpha: number) => {
       color.set({ a: alpha })

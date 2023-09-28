@@ -1,4 +1,4 @@
-import {IColorPickerRef as Ref} from '@/types';
+import {IColorSelectPanelRef as Ref} from '@/types';
 import Color from './utils/color'
 import { onConfirm, onCancel, onHSVUpdate, onAlphaUpdate } from '.'
 

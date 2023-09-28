@@ -1,4 +1,4 @@
-import {IColorPickerRef as Ref} from '@/types';
+import {IColorSelectPanel as Ref} from '@/types';
 import { draggable } from '../utils/use-drag'
 import Color from '../utils/color'
 import {
